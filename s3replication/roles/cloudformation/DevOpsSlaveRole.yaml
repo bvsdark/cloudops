@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: "2010-09-09"
+# Description of what this CloudFormation Template is going to produce
+Description: AWS CloudFormation template to create cross-account slave roles
+# Define Parameter Variables that will be used throughout this Cloudformation template.
+# Define Resources that will be launched via this template
+Resources:
+  # Slave Role for target accounts
+  DevOpsRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: DevOpsSlaveRole
+      AssumeRolePolicyDocument:
+        Statement:
+        - Effect: Allow
+          Principal:
+            AWS:
+            - arn:aws:iam::AWSDEVOPSACCOUNT:role/DevOpsMasterRole
+          Action: sts:AssumeRole
+      Path: /
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/AdministratorAccess #Uncomment this line for AWS administrative access, use only for testing purposes.
+      # - arn:aws:iam::aws:policy/AmazonS3FullAccess  #Uncomment this line and below for lowest access.
+      # - PolicyName: Iam-Actions
+      #   PolicyDocument:
+      #     Statement:
+      #     - Effect: Allow
+      #       Action:
+      #       - iam:ListAccountAliases
+      #       Resource: "*"
+
+# Specify any outputs for the stack.
+Outputs:
+  DevOpsRoleArn:
+    Value: !GetAtt DevOpsRole.Arn

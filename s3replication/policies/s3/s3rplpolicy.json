@@ -1,0 +1,30 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "S3ReplicationPolicyAUT",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::sourcesawsid:root"
+            },
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetReplicationConfiguration",
+                "s3:GetObjectVersionForReplication",
+                "s3:GetObjectVersionAcl",
+                "s3:GetObjectVersionTagging",
+                "s3:GetObjectRetention",
+                "s3:GetObjectLegalHold",
+                "s3:GetBucketVersioning",
+                "s3:PutBucketVersioning",
+                "s3:ReplicateObject",
+                "s3:ReplicateDelete",
+                "s3:ObjectOwnerOverrideToBucketOwner"
+            ],
+            "Resource": [
+                "arn:aws:s3:::destbucket",
+                "arn:aws:s3:::destbucket/*"
+            ]
+        }
+    ]
+}

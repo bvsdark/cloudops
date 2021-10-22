@@ -1,0 +1,33 @@
+{
+  "Role": "arn:aws:iam::rplacc:role/rplroleaut",
+  "Rules": [
+    {
+      "ID": "rplruleaut",
+      "Priority": 0,
+      "Filter": {},
+      "Status": "Enabled",
+      "Destination": {
+        "Bucket": "arn:aws:s3:::destbucket",
+        "Account": "destaccount",
+        "AccessControlTranslation": {
+          "Owner": "Destination"
+        },
+        "ReplicationTime": {
+          "Status": "Enabled",
+          "Time": {
+            "Minutes": 15
+          }
+        },
+        "Metrics": {
+          "Status": "Enabled",
+          "EventThreshold": {
+            "Minutes": 15
+          }
+        }
+      },
+      "DeleteMarkerReplication": {
+        "Status": "Enabled"
+      }
+    }
+  ]
+}
