@@ -26,6 +26,11 @@ Resources:
       #     - Effect: Allow
       #       Action:
       #       - iam:ListAccountAliases
+      #       - iam:ListRoles
+      #       - iam:DeleteRolePolicy
+      #       - iam:DeleteRole
+      #       - iam:CreateRole
+      #       - iam:PutRolePolicy
       #       Resource: "*"
 
 # Specify any outputs for the stack.
