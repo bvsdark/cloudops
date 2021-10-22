@@ -5,7 +5,6 @@ source $WORKSPACE/s3replication/scripts/./envawsaccounts.sh
 
 #ENV
 s3rplcblock=""
-description="This resource allows replication from $SourceBucket bucket at account $SourceBucketawsalias towards bucket $DestBucket at account $DestBucketawsalias."
 policyname="S3RPLFrom"
 rolelabel="S3ReplicationRoleAUT"
 #### PARAMETER VALIDATION #######
@@ -488,7 +487,8 @@ checkrole=$(aws iam list-roles --region $AWSREGION | jq -r .Roles[].RoleName | g
             echo -e "#############################################################\n"
            
             s3roletrustpolicy=$(cat $WORKSPACE/s3replication/policies/iam/S3-role-trust-policy.json) #Get policy
-
+            description="This resource allows replication from $SourceBucket bucket at account $SourceBucketawsalias towards bucket $DestBucket at account $DestBucketawsalias."
+            
             # Create role with policy
             aws iam create-role --role-name ${SourceBucket}-$rolelabel \
             --assume-role-policy-document "$s3roletrustpolicy"  \
@@ -558,4 +558,3 @@ checrplkrule=$(aws s3api get-bucket-replication --bucket $SourceBucket --region 
                exit 1
                fi
          fi
-
